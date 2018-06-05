@@ -65,7 +65,7 @@ function startBySpace(event) {
             if(currentYPos == bottomIndex)
             {
                 clearInterval(IntervalId);
-                alert('Game Over '+seconds);
+                alert('Game Over, You have played for '+seconds+' seconds.');
                 p.style.left = 0 + 'px';
                 p.style.top = 0 + 'px';
                 temp = p.style.left;
@@ -99,7 +99,7 @@ function startBySpace(event) {
         function RightLeft() {
             if(currentXPos == leftIndex) {
                 clearInterval(IntervalId);
-                alert('Game Over '+seconds);
+                alert('Game Over, You have played for '+seconds+' seconds.');
                 p.style.left = 0 + 'px';
                 p.style.top = 0 + 'px';
                 temp = p.style.left;
@@ -135,7 +135,7 @@ function startBySpace(event) {
         function BottomTop() {
             if(currentYPos == 0) {
                 clearInterval(IntervalId);
-                alert('Game Over '+seconds);
+                alert('Game Over, You have played for '+seconds+' seconds.');
                 p.style.left = 0 + 'px';
                 p.style.top = 0 + 'px';
                 temp = p.style.left;
@@ -169,7 +169,7 @@ function moveRight() {
         if(currentXPos == rightIndex)
         {
             clearInterval(IntervalId);
-            alert('Game Over '+seconds);
+            alert('Game Over,You have played for '+seconds+' seconds.');
             p.style.left = 0 + 'px';
             p.style.top = 0 + 'px';
             temp = p.style.left;
