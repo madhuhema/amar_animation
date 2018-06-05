@@ -2,10 +2,16 @@ var IntervalId;
 var currentXPos = 0;
 var currentYPos = 0;
 var temp;
-var IntervalId,seconds;
+var IntervalId;
 var count = 1;
 var speed = 8;
 var startDate = new Date().getTime();
+var seconds = 0;
+var timer;
+var rightIndex = 446;
+var leftIndex = 0;
+var topIndex = 0;
+var bottomIndex = 396; 
 
 var beforemm = new Date().getMinutes();
 var beforess = new Date().getSeconds();
@@ -20,36 +26,53 @@ function startBySpace(event) {
     var downASCII = 40;
     var Xaxis = document.getElementById('pixel');
     var Yaxis = document.getElementById('pixel');
-    var rightIndex = 442;
-    var leftIndex = 440;
-    var topIndex = 0;
-    var bottomIndex = 0; 
+    
+    function getPlayTime()
+    {
+        seconds++;
+        console.log(seconds);
+    }
 
     if(eventValue == spaceASCII) {
         if(count%2 == 1)
+        {
             moveRight();
+            timer = setInterval(getPlayTime,1000);
+        }
         else
         {
+            clearInterval(timer);
             clearInterval(IntervalId);
-            var stopDate = new Date().getTime();
-            seconds = parseInt((stopDate-startDate))/1000;
-            console.log('startDate '+startDate);
-            console.log('stopDate '+stopDate);
         }
         count++;
-        console.log(count);
+        
     }
     else if(eventValue == downASCII) {
+        var p = document.getElementById('pixel');
         if(currentXPos)
-        clearInterval(IntervalId);
+            clearInterval(IntervalId);
         document.getElementById("img").src="down.jpg";
-        IntervalId = setInterval(TopBottom, speed-count);
+
+        if(seconds < 10)
+            IntervalId = setInterval(TopBottom, speed);
+        else if(seconds >=10 && seconds <20)
+            IntervalId = setInterval(TopBottom, speed-3);
+        else if(seconds >=20 && seconds <30)
+            IntervalId = setInterval(TopBottom, speed-6);
+        else
+            IntervalId = setInterval(TopBottom, speed-8);
         function TopBottom() {
-            if(currentYPos == 440)
+            if(currentYPos == bottomIndex)
             {
                 clearInterval(IntervalId);
-                console.log(seconds);
                 alert('Game Over '+seconds);
+                p.style.left = 0 + 'px';
+                p.style.top = 0 + 'px';
+                temp = p.style.left;
+                currentXPos = parseInt(temp.substring(0,temp.length-2));
+                document.getElementById("img").src="download.jpg";
+                clearInterval(timer);
+                document.location.reload(true);
             }
             else
             {
@@ -65,11 +88,25 @@ function startBySpace(event) {
         var p = document.getElementById('pixel');
         clearInterval(IntervalId);
         document.getElementById("img").src="left.jpg";
-        IntervalId = setInterval(RightLeft, speed-count);
+        if(seconds < 10)
+            IntervalId = setInterval(RightLeft, speed);
+        else if(seconds >=10 && seconds <20)
+            IntervalId = setInterval(RightLeft, speed-3);
+        else if(seconds >=20 && seconds <30)
+            IntervalId = setInterval(RightLeft, speed-6);
+        else
+            IntervalId = setInterval(RightLeft, speed-8);
         function RightLeft() {
-            if(currentXPos == 0) {
+            if(currentXPos == leftIndex) {
                 clearInterval(IntervalId);
                 alert('Game Over '+seconds);
+                p.style.left = 0 + 'px';
+                p.style.top = 0 + 'px';
+                temp = p.style.left;
+                currentXPos = parseInt(temp.substring(0,temp.length-2));
+                document.getElementById("img").src="download.jpg";
+                clearInterval(timer);
+                document.location.reload(true);
             }
             else {
                 currentXPos--;
@@ -86,11 +123,26 @@ function startBySpace(event) {
         var p = document.getElementById('pixel');
         clearInterval(IntervalId);
         document.getElementById("img").src="top.jpg";
-        IntervalId = setInterval(BottomTop, speed-count);
+
+        if(seconds < 10)
+            IntervalId = setInterval(BottomTop, speed);
+        else if(seconds >=10 && seconds <20)
+            IntervalId = setInterval(BottomTop, speed-3);
+        else if(seconds >=20 && seconds <30)
+            IntervalId = setInterval(BottomTop, speed-6);
+        else
+            IntervalId = setInterval(BottomTop, speed-8);
         function BottomTop() {
             if(currentYPos == 0) {
                 clearInterval(IntervalId);
                 alert('Game Over '+seconds);
+                p.style.left = 0 + 'px';
+                p.style.top = 0 + 'px';
+                temp = p.style.left;
+                currentXPos = parseInt(temp.substring(0,temp.length-2));
+                document.getElementById("img").src="download.jpg";
+                clearInterval(timer);
+                document.location.reload(true);
             }
             else {
                 currentYPos--;
@@ -101,17 +153,30 @@ function startBySpace(event) {
         }
     }
 }
-
 function moveRight() {
     var p = document.getElementById('pixel');
     clearInterval(IntervalId);
     document.getElementById("img").src="download.jpg";
-    IntervalId = setInterval(LeftRight, speed-count);
+    if(seconds < 10)
+        IntervalId = setInterval(LeftRight, speed);
+    else if(seconds >=10 && seconds <20)
+        IntervalId = setInterval(LeftRight, speed-3);
+    else if(seconds >=20 && seconds <30)
+        IntervalId = setInterval(LeftRight, speed-6);
+    else
+        IntervalId = setInterval(LeftRight, speed-8);
     function LeftRight() {
-        if(currentXPos == 442)
+        if(currentXPos == rightIndex)
         {
             clearInterval(IntervalId);
             alert('Game Over '+seconds);
+            p.style.left = 0 + 'px';
+            p.style.top = 0 + 'px';
+            temp = p.style.left;
+            currentXPos = parseInt(temp.substring(0,temp.length-2));
+            document.getElementById("img").src="download.jpg";
+            clearInterval(timer);
+            document.location.reload(true);
         }
         else
         {
